@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { TasksModule } from './tasks/tasks.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { typeOrmConfig } from './config/typeorm.config';
+import { ConfigModule } from '@nestjs/config';
+
+import { TasksModule } from './modules/tasks/tasks.module';
+import { DbModule } from './modules/db/db.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeOrmConfig), TasksModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), DbModule, TasksModule],
 })
 export class AppModule {}
